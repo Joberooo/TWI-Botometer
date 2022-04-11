@@ -1,5 +1,5 @@
 class Result:
-    def __init__(self, botometer_object):
+    def __init__(self, botometer_object, user_name):
 
         if botometer_object == "hasNoTimeline":
             self.all_features = 0
@@ -12,7 +12,7 @@ class Result:
             self.spammer = 0
             self.majority_lang = 0
             self.id_str = 0
-            self.screen_name = 0
+            self.screen_name = user_name
             self.has_timeline = False
             self.account_exist = True
         elif botometer_object == "doesntExist":
@@ -26,7 +26,7 @@ class Result:
             self.spammer = 0
             self.majority_lang = 0
             self.id_str = 0
-            self.screen_name = 0
+            self.screen_name = user_name
             self.has_timeline = False
             self.account_exist = False
         else:

@@ -1,10 +1,8 @@
-import botometer
 from flask import Flask, render_template
-from result import Result
-
-from Backend import apiBotometer
+from Backend.building_result_list import add_to_list
 
 app = Flask(__name__)
+results_list = []
 
 
 @app.route("/checkAccount")
@@ -14,17 +12,9 @@ def check_accountOne():
 
 @app.route("/checkAccount/<user_name>")
 def check_accountTwo(user_name=None):
-    if user_name is not None:
-        try:
-            result_obj = Result(apiBotometer.check_account(user_name))
-        except botometer.NoTimelineError:
-            result_obj = Result("hasNoTimeline")
-        except botometer.TweepError:
-            result_obj = Result("doesntExist")
-    else:
-        result_obj = None
+    add_to_list(user_name, results_list)
     return render_template("checkAccount.html",
-                           result_obj=result_obj,
+                           results_list=results_list,
                            user_name=user_name)
 
 
