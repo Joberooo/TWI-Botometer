@@ -1,15 +1,22 @@
 from flask import Flask, render_template, flash
 
+from Backend import apiBotometer
+
 app = Flask(__name__)
 
 
-def check_button_click():
-    print("ok")
-
-
 @app.route("/checkAccount")
-def check_account():
-    return render_template("checkAccount.html", content=None)
+def check_accountOne():
+    return render_template("checkAccount.html", result=None, user_name=None)
+
+
+@app.route("/checkAccount/<user_name>")
+def check_accountTwo(user_name=None):
+    if user_name is not None:
+        result = apiBotometer.check_account(user_name)
+    else:
+        result = None
+    return render_template("checkAccount.html", result=result, user_name=user_name)
 
 
 @app.route("/")

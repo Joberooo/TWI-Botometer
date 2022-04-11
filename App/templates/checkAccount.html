@@ -2,19 +2,30 @@
 
 {% block stylesheet %}
 <link rel="stylesheet" href="../static/css/checkAccount.css">
+
+<script type=text/javascript>
+    function check_button_click() {
+        var username = document.getElementById("checkInput").value
+        if(username !== "")
+            window.location.href = "/checkAccount/" + username
+        else
+            window.location.href = "/checkAccount"
+    }
+</script>
 {% endblock stylesheet %}
 
 {% block content %}
 <div id="checkContent">
     <div id="checkInputArea">
-        <input type="text" id="checkInput" placeholder="@UserName" />
+        <input type="text" id="checkInput" placeholder="@UserName" value="{{ user_name }}"/>
     </div>
     <div id="checkButtonArea">
-        <input  type="button" id="checkButton" value="Check" />
+        <input  type="button" id="checkButton" value="Check" onclick="check_button_click()" />
     </div>
     <div id="checkResult">
-        {% include "resultContent.html" %}
-        {% block resultContent %}{% endblock %}
+        {% if user_name is not sameas None %}
+            Wynik = {{result}}
+        {% endif %}
     </div>
 </div>
 {% endblock content %}

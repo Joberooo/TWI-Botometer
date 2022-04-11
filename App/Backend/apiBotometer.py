@@ -11,5 +11,6 @@ boto_meter_object = botometer.Botometer(wait_on_ratelimit=True,
                                         rapidapi_key=rapid_api_key,
                                         **twitter_app_auth)
 
-# Check a single account by screen name
-result = boto_meter_object.check_account('@Zelazna_Dywizja')
+
+def check_account(name):
+    return boto_meter_object.check_account(name)
