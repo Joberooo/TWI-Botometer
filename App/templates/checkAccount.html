@@ -42,7 +42,6 @@
         }
 
         function toggleDescription(id){
-            console.log("id", id)
             var elements = document.getElementsByClassName(id);
             for(var i = 0; i < elements.length; i++){
                 if (elements[i].style.display === 'none') {
@@ -65,18 +64,18 @@
     </div>
     <div id="checkResult">
         {% for element in results_list %}
-            <div id="result-{{ element.id_str }}" class="result">
+            <div id="result-{{ element.screen_name }}" class="result">
             <script>
                 var randomColor = Math.floor(Math.random()*16777215).toString(16);
-                document.getElementById("result-{{ element.id_str }}").style.backgroundColor = "#" + randomColor;
-                document.getElementById("result-{{ element.id_str }}").style.color = getContrast(randomColor);
+                document.getElementById("result-{{ element.screen_name }}").style.backgroundColor = "#" + randomColor;
+                document.getElementById("result-{{ element.screen_name }}").style.color = getContrast(randomColor);
             </script>
-                <div id="resultHeader" onClick="toggleDescription({{ element.id_str }})">
+                <div id="resultHeader" onClick="toggleDescription('{{ element.screen_name }}')">
                     <div id="resultUserName">@{{ element.screen_name }}</div>
                     <div id="resultAllFeatures">{{ element.overall }} / 5</div>
                 </div>
                 <div id="resultContent">
-                    <div class="{{ element.id_str }}" id="resultSection">
+                    <div class="{{ element.screen_name }}" id="resultSection">
                         <h4>Bot type scores: </h4>
                         <div class="resultLine">
                             <div class="resultText">Echo-chamber</div>
@@ -103,7 +102,7 @@
                             <div class="resultValue">{{ element.other }}</div>
                         </div>
                     </div>
-                    <div class="{{ element.id_str }}" id="resultSection">
+                    <div class="{{ element.screen_name }}" id="resultSection">
                         <h4>Bot score based on:</h4>
                         <div class="resultLine">
                             <div class="resultText">All features:</div>
@@ -118,12 +117,8 @@
                             <div class="resultValue">{{ element.majority_lang }}</div>
                         </div>
                     </div>
-                    <div class="{{ element.id_str }}" id="resultSection">
+                    <div class="{{ element.screen_name }}" id="resultSection">
                         <h4>Other information:</h4>
-                        <div class="resultLine">
-                            <div class="resultText">User id:</div>
-                            <div class="resultValue">{{ element.id_str }}</div>
-                        </div>
                         <div class="resultLine">
                             <div class="resultText">User screen name:</div>
                             <div class="resultValue">{{ element.screen_name }}</div>
@@ -131,6 +126,9 @@
                     </div>
                 </div>
             </div>
+            <script>
+                toggleDescription('{{ element.screen_name }}');
+            </script>
         {% endfor %}
     </div>
 </div>
