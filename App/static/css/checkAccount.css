@@ -1,3 +1,23 @@
-#cos{
-    font-size: 100px;
+#checkContent{
+    width: 80%;
+    margin: 0 auto;
+    background: #fffa;
+    border-radius: 25px;
+    overflow: hidden;
+    padding: 25px;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    box-shadow: 0 0 20px -5px #fff;
+}
+
+#checkContent #checkInputArea{
+
+}
+
+#checkContent #checkButtonArea{
+
+}
+
+#checkContent #checkResult{
+
 }

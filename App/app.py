@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/checkAccount")
 def check_accountOne():
-    return render_template("checkAccount.html", result=None, user_name=None)
+    return render_template("checkAccount.html", result=None)
 
 
 @app.route("/checkAccount/<user_name>")

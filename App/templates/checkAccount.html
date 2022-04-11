@@ -23,7 +23,7 @@
         <input  type="button" id="checkButton" value="Check" onclick="check_button_click()" />
     </div>
     <div id="checkResult">
-        {% if user_name is not sameas None %}
+        {% if user_name %}
             Wynik = {{result}}
         {% endif %}
     </div>
