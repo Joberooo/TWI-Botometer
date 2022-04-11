@@ -13,6 +13,8 @@ def check_accountOne():
 @app.route("/checkAccount/<user_name>")
 def check_accountTwo(user_name=None):
     add_to_list(user_name, results_list)
+    for result in results_list:
+        print(result.screen_name)
     return render_template("checkAccount.html",
                            results_list=results_list,
                            user_name=user_name)

@@ -11,7 +11,6 @@ class Result:
             self.self_declared = 0
             self.spammer = 0
             self.majority_lang = 0
-            self.id_str = 0
             self.screen_name = user_name
             self.has_timeline = False
             self.account_exist = True
@@ -25,7 +24,6 @@ class Result:
             self.self_declared = 0
             self.spammer = 0
             self.majority_lang = 0
-            self.id_str = 0
             self.screen_name = user_name
             self.has_timeline = False
             self.account_exist = False
@@ -39,7 +37,6 @@ class Result:
             self.self_declared = botometer_object['display_scores']['universal']['self_declared']
             self.spammer = botometer_object['display_scores']['universal']['spammer']
             self.majority_lang = botometer_object['user']['majority_lang']
-            self.id_str = botometer_object['user']['user_data']['id_str']
             self.screen_name = botometer_object['user']['user_data']['screen_name']
             self.has_timeline = True
             self.account_exist = True
