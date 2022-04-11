@@ -20,85 +20,118 @@
                 }
             });
         });
+
+        function getContrast(hexcolor){
+            if (hexcolor.slice(0, 1) === '#') {
+                hexcolor = hexcolor.slice(1);
+            }
+
+            if (hexcolor.length === 3) {
+                hexcolor = hexcolor.split('').map(function (hex) {
+                    return hex + hex;
+                }).join('');
+            }
+
+            var r = parseInt(hexcolor.substr(0,2),16);
+            var g = parseInt(hexcolor.substr(2,2),16);
+            var b = parseInt(hexcolor.substr(4,2),16);
+
+            var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+
+            return (yiq >= 128) ? 'black' : 'white';
+        }
+
+        function toggleDescription(id){
+            console.log("id", id)
+            var elements = document.getElementsByClassName(id);
+            for(var i = 0; i < elements.length; i++){
+                if (elements[i].style.display === 'none') {
+                    elements[i].style.display = 'block';
+                } else {
+                    elements[i].style.display = 'none';
+                }
+            }
+        }
     </script>
 {% endblock stylesheet %}
 
 {% block content %}
 <div id="checkContent">
     <div id="checkInputArea">
-        <input type="text" id="check_input" placeholder="@UserName" value="{{ user_name }}"/>
+        <input type="text" id="check_input" placeholder="@UserName" value="{{ user_name }}" />
     </div>
     <div id="checkButtonArea">
-        <input  type="button" id="check_button" value="Check" />
+        <input type="button" id="check_button" value="Check" />
     </div>
     <div id="checkResult">
-        {% if user_name %}
-            <div id="result-{{ result_obj.id_str }}" class="result">
+        {% for element in results_list %}
+            <div id="result-{{ element.id_str }}" class="result">
             <script>
                 var randomColor = Math.floor(Math.random()*16777215).toString(16);
-                document.getElementById("result-{{ result_obj.id_str }}").style.backgroundColor = "#" + randomColor;
+                document.getElementById("result-{{ element.id_str }}").style.backgroundColor = "#" + randomColor;
+                document.getElementById("result-{{ element.id_str }}").style.color = getContrast(randomColor);
             </script>
-                <div id="resultHeader">
-                    <div id="resultUserName">@{{ user_name }}</div>
-                    <div id="resultAllFeatures">{{ result_obj.overall }} / 5</div>
+                <div id="resultHeader" onClick="toggleDescription({{ element.id_str }})">
+                    <div id="resultUserName">@{{ element.screen_name }}</div>
+                    <div id="resultAllFeatures">{{ element.overall }} / 5</div>
                 </div>
                 <div id="resultContent">
-                    <div class="resultSection">
+                    <div class="{{ element.id_str }}" id="resultSection">
                         <h4>Bot type scores: </h4>
                         <div class="resultLine">
                             <div class="resultText">Echo-chamber</div>
-                            <div class="resultValue">{{ result_obj.astroturf }}</div>
+                            <div class="resultValue">{{ element.astroturf }}</div>
                         </div>
                         <div class="resultLine">
                             <div class="resultText">Fake follower</div>
-                            <div class="resultValue">{{ result_obj.fake_follower }}</div>
+                            <div class="resultValue">{{ element.fake_follower }}</div>
                         </div>
                         <div class="resultLine">
                             <div class="resultText">Financial</div>
-                            <div class="resultValue">{{ result_obj.financial }}</div>
+                            <div class="resultValue">{{ element.financial }}</div>
                         </div>
                         <div class="resultLine">
                             <div class="resultText">Self declared</div>
-                            <div class="resultValue">{{ result_obj.self_declared }}</div>
+                            <div class="resultValue">{{ element.self_declared }}</div>
                         </div>
                         <div class="resultLine">
                             <div class="resultText">Spammer</div>
-                            <div class="resultValue">{{ result_obj.spammer }}</div>
+                            <div class="resultValue">{{ element.spammer }}</div>
                         </div>
                         <div class="resultLine">
                             <div class="resultText">Other</div>
-                            <div class="resultValue">{{ result_obj.other }}</div>
+                            <div class="resultValue">{{ element.other }}</div>
                         </div>
                     </div>
-                    <div class="resultSection">
+                    <div class="{{ element.id_str }}" id="resultSection">
                         <h4>Bot score based on:</h4>
                         <div class="resultLine">
                             <div class="resultText">All features:</div>
-                            <div class="resultValue">{{ result_obj.all_features }}</div>
+                            <div class="resultValue">{{ element.all_features }}</div>
                         </div>
                         <div class="resultLine">
                             <div class="resultText">Language-independent:</div>
-                            <div class="resultValue">{{ result_obj.overall }}</div>
+                            <div class="resultValue">{{ element.overall }}</div>
                         </div>
                         <div class="resultLine">
                             <div class="resultText">Majority tweet language:</div>
-                            <div class="resultValue">{{ result_obj.majority_lang }}</div>
+                            <div class="resultValue">{{ element.majority_lang }}</div>
                         </div>
                     </div>
-                    <div class="resultSection">
+                    <div class="{{ element.id_str }}" id="resultSection">
                         <h4>Other information:</h4>
                         <div class="resultLine">
                             <div class="resultText">User id:</div>
-                            <div class="resultValue">{{ result_obj.id_str }}</div>
+                            <div class="resultValue">{{ element.id_str }}</div>
                         </div>
                         <div class="resultLine">
                             <div class="resultText">User screen name:</div>
-                            <div class="resultValue">{{ result_obj.screen_name }}</div>
+                            <div class="resultValue">{{ element.screen_name }}</div>
                         </div>
                     </div>
                 </div>
             </div>
-        {% endif %}
+        {% endfor %}
     </div>
 </div>
 {% endblock content %}

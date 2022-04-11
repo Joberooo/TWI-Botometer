@@ -3,7 +3,7 @@
     padding: 10px;
     overflow: hidden;
     box-sizing: border-box;
-    margin: 0;
+    margin: 1em 0 0 0;
 }
 
 #checkContent #checkResult .result #resultHeader{
@@ -12,6 +12,10 @@
     padding: 0;
     overflow: hidden;
     box-sizing: border-box;
+}
+
+#checkContent #checkResult .result #resultHeader:hover{
+    cursor: pointer;
 }
 
 #checkContent #checkResult .result #resultHeader #resultUserName{
@@ -42,22 +46,22 @@
     box-sizing: border-box;
 }
 
-#checkContent #checkResult .result #resultContent .resultSection{
+#checkContent #checkResult .result #resultContent #resultSection{
     width: 50%;
     margin: 0;
     padding: 0 1em 0 0;
     overflow: hidden;
     box-sizing: border-box;
-    display: block;
+    display: none;
     float: left;
 }
 
-#checkContent #checkResult .result #resultContent .resultSection h4{
+#checkContent #checkResult .result #resultContent #resultSection h4{
     margin: 1em 0 0.5em 0;
     border-bottom: 1px solid #000;
 }
 
-#checkContent #checkResult .result #resultContent .resultSection .resultLine{
+#checkContent #checkResult .result #resultContent #resultSection .resultLine{
     width: 100%;
     margin: 0;
     padding: 0;
@@ -67,7 +71,7 @@
     float: left;
 }
 
-#checkContent #checkResult .result #resultContent .resultSection .resultLine .resultText{
+#checkContent #checkResult .result #resultContent #resultSection .resultLine .resultText{
     width: 70%;
     margin: 0;
     padding: 0;
@@ -77,7 +81,7 @@
     float: left;
 }
 
-#checkContent #checkResult .result #resultContent .resultSection .resultLine .resultValue{
+#checkContent #checkResult .result #resultContent #resultSection .resultLine .resultValue{
     width: 30%;
     margin: 0;
     padding: 0;
