@@ -1,3 +1,4 @@
+import botometer
 from flask import Flask, render_template
 
 from Backend import apiBotometer
@@ -7,7 +8,7 @@ app = Flask(__name__)
 
 class Result:
     def __init__(self, all_features, astroturf, fake_follower, financial, other, overall, self_declared, spammer,
-                 majority_lang, id_str, screen_name):
+                 majority_lang, id_str, screen_name, has_timeline, account_exist):
         self.all_features = all_features
         self.astroturf = astroturf
         self.fake_follower = fake_follower
@@ -19,6 +20,8 @@ class Result:
         self.majority_lang = majority_lang
         self.id_str = id_str
         self.screen_name = screen_name
+        self.has_timeline = has_timeline
+        self.account_exist = account_exist
 
 
 @app.route("/checkAccount")
@@ -29,25 +32,36 @@ def check_accountOne():
 @app.route("/checkAccount/<user_name>")
 def check_accountTwo(user_name=None, result_obj=None):
     if user_name is not None:
-        result = apiBotometer.check_account(user_name)
+        try:
+            result = apiBotometer.check_account(user_name)
 
-        all_features = result['display_scores']['english']['overall']
-        astroturf = result['display_scores']['universal']['astroturf']
-        fake_follower = result['display_scores']['universal']['fake_follower']
-        financial = result['display_scores']['universal']['financial']
-        other = result['display_scores']['universal']['other']
-        overall = result['display_scores']['universal']['overall']
-        self_declared = result['display_scores']['universal']['self_declared']
-        spammer = result['display_scores']['universal']['spammer']
-        majority_lang = result['user']['majority_lang']
-        id_str = result['user']['user_data']['id_str']
-        screen_name = result['user']['user_data']['screen_name']
+            all_features = result['display_scores']['english']['overall']
+            astroturf = result['display_scores']['universal']['astroturf']
+            fake_follower = result['display_scores']['universal']['fake_follower']
+            financial = result['display_scores']['universal']['financial']
+            other = result['display_scores']['universal']['other']
+            overall = result['display_scores']['universal']['overall']
+            self_declared = result['display_scores']['universal']['self_declared']
+            spammer = result['display_scores']['universal']['spammer']
+            majority_lang = result['user']['majority_lang']
+            id_str = result['user']['user_data']['id_str']
+            screen_name = result['user']['user_data']['screen_name']
 
-        result_obj = Result(all_features, astroturf, fake_follower, financial, other, overall, self_declared,
-                           spammer, majority_lang, id_str, screen_name)
+            result_obj = Result(all_features, astroturf, fake_follower, financial, other, overall, self_declared,
+                                spammer, majority_lang, id_str, screen_name, has_timeline=True, account_exist=True)
+        except botometer.NoTimelineError:
+            result = None
+            result_obj = Result(0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, has_timeline=False, account_exist=True)
+        except botometer.TweepError:
+            result = None
+            result_obj = Result(0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, has_timeline=False, account_exist=True)
+
 
     else:
         result = None
+        result_obj = None
     return render_template("checkAccount.html",
                            result=result,
                            result_obj=result_obj,
