@@ -1,7 +1,7 @@
 #checkContent{
     width: 80%;
     margin: 0 auto;
-    background: #fffa;
+    background: #fff;
     border-radius: 25px;
     overflow: hidden;
     padding: 25px;
@@ -11,13 +11,58 @@
 }
 
 #checkContent #checkInputArea{
+    width: 80%;
+    margin: 0;
+    padding: 0 3em 0 0;
+    overflow: hidden;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+}
 
+#checkContent #checkInputArea input{
+    font-size: 1em;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 3px solid #757575;
+    box-sizing: border-box;
+    background: #0000;
+}
+#checkContent #checkInputArea input:focus{
+    outline:none;
+    border-bottom: 3px solid #D2353A;
+    transition: border 0.3s;
 }
 
 #checkContent #checkButtonArea{
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+}
 
+#checkContent #checkButtonArea input{
+    font-size: 1em;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    background: #061B2C;
+    color: #F5F3F5;
+}
+
+#checkContent #checkButtonArea input:hover{
+    cursor: pointer;
+    color: #D2353A;
+    transition: color 0.3s;
 }
 
 #checkContent #checkResult{
-
+    width: 100%;
 }

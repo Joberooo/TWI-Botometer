@@ -1,30 +1,103 @@
 {% extends "base.html" %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="../static/css/checkAccount.css">
+    <link rel="stylesheet" href="../static/css/checkAccount.css">
+    <link rel="stylesheet" href="../static/css/result.css">
 
-<script type=text/javascript>
-    function check_button_click() {
-        var username = document.getElementById("checkInput").value
-        if(username !== "")
-            window.location.href = "/checkAccount/" + username
-        else
-            window.location.href = "/checkAccount"
-    }
-</script>
+    <script type=text/javascript>
+        $(function() {
+            $("#check_button").click(function() {
+                var username = document.getElementById("check_input").value
+                if(username !== "")
+                    window.location.href = "/checkAccount/" + username
+                else
+                    window.location.href = "/checkAccount"
+            });
+
+            $("#check_input").keyup(function(event) {
+                if (event.keyCode === 13) {
+                    $("#check_button").click();
+                }
+            });
+        });
+    </script>
 {% endblock stylesheet %}
 
 {% block content %}
 <div id="checkContent">
     <div id="checkInputArea">
-        <input type="text" id="checkInput" placeholder="@UserName" value="{{ user_name }}"/>
+        <input type="text" id="check_input" placeholder="@UserName" value="{{ user_name }}"/>
     </div>
     <div id="checkButtonArea">
-        <input  type="button" id="checkButton" value="Check" onclick="check_button_click()" />
+        <input  type="button" id="check_button" value="Check" />
     </div>
     <div id="checkResult">
         {% if user_name %}
-            Wynik = {{result}}
+            <div id="result-{{ result_obj.id_str }}" class="result">
+            <script>
+                var randomColor = Math.floor(Math.random()*16777215).toString(16);
+                document.getElementById("result-{{ result_obj.id_str }}").style.backgroundColor = "#" + randomColor;
+            </script>
+                <div id="resultHeader">
+                    <div id="resultUserName">@{{ user_name }}</div>
+                    <div id="resultAllFeatures">{{ result_obj.overall }} / 5</div>
+                </div>
+                <div id="resultContent">
+                    <div class="resultSection">
+                        <h4>Bot type scores: </h4>
+                        <div class="resultLine">
+                            <div class="resultText">Echo-chamber</div>
+                            <div class="resultValue">{{ result_obj.astroturf }}</div>
+                        </div>
+                        <div class="resultLine">
+                            <div class="resultText">Fake follower</div>
+                            <div class="resultValue">{{ result_obj.fake_follower }}</div>
+                        </div>
+                        <div class="resultLine">
+                            <div class="resultText">Financial</div>
+                            <div class="resultValue">{{ result_obj.financial }}</div>
+                        </div>
+                        <div class="resultLine">
+                            <div class="resultText">Self declared</div>
+                            <div class="resultValue">{{ result_obj.self_declared }}</div>
+                        </div>
+                        <div class="resultLine">
+                            <div class="resultText">Spammer</div>
+                            <div class="resultValue">{{ result_obj.spammer }}</div>
+                        </div>
+                        <div class="resultLine">
+                            <div class="resultText">Other</div>
+                            <div class="resultValue">{{ result_obj.other }}</div>
+                        </div>
+                    </div>
+                    <div class="resultSection">
+                        <h4>Bot score based on:</h4>
+                        <div class="resultLine">
+                            <div class="resultText">All features:</div>
+                            <div class="resultValue">{{ result_obj.all_features }}</div>
+                        </div>
+                        <div class="resultLine">
+                            <div class="resultText">Language-independent:</div>
+                            <div class="resultValue">{{ result_obj.overall }}</div>
+                        </div>
+                        <div class="resultLine">
+                            <div class="resultText">Majority tweet language:</div>
+                            <div class="resultValue">{{ result_obj.majority_lang }}</div>
+                        </div>
+                    </div>
+                    <div class="resultSection">
+                        <h4>Other information:</h4>
+                        <div class="resultLine">
+                            <div class="resultText">User id:</div>
+                            <div class="resultValue">{{ result_obj.id_str }}</div>
+                        </div>
+                        <div class="resultLine">
+                            <div class="resultText">User screen name:</div>
+                            <div class="resultValue">{{ result_obj.screen_name }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% endif %}
     </div>
 </div>
