@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="../static/css/checkAccount.css">
+{% endblock stylesheet %}
+
+{% block content %}
+<div id="checkContent">
+    <div id="checkInputArea">
+        <input type="text" id="checkInput" placeholder="@UserName" />
+    </div>
+    <div id="checkButtonArea">
+        <input  type="button" id="checkButton" value="Check" />
+    </div>
+    <div id="checkResult">
+        {% include "resultContent.html" %}
+        {% block resultContent %}{% endblock %}
+    </div>
+</div>
+{% endblock content %}
