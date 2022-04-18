@@ -1,8 +1,10 @@
+import random
+
 import botometer
 import twython.exceptions
 
 from Backend import apiBotometer
-from Backend.apiTwitter import get_user_from_twitter
+from Backend.apiTwitter import get_user_from_twitter, get_user_name_from_id
 from Backend.result import Result
 
 
@@ -22,6 +24,15 @@ def delete_from_list(user_name, results_list):
             if user_name == result.screen_name:
                 results_list.remove(result)
                 break
+
+
+def add_random_to_list(results_list):
+    user_name = ''
+    while user_name == '':
+        x = random.randint(0, 5000000000)
+        user_name = get_user_name_from_id(x)
+        if user_name != '':
+            add_to_list(user_name, results_list)
 
 
 def get_result(user_name):

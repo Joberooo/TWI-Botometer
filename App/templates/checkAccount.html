@@ -14,6 +14,10 @@
                     window.location.href = "/checkAccount"
             });
 
+            $("#random_button").click(function() {
+                window.location.href = "/randomAccount"
+            });
+
             $("#check_input").keyup(function(event) {
                 if (event.keyCode === 13) {
                     $("#check_button").click();
@@ -65,6 +69,9 @@
     </div>
     <div id="checkButtonArea">
         <input type="button" id="check_button" value="Check" />
+    </div>
+    <div id="randomButtonArea">
+        <input type="button" id="random_button" value="&#127922;" />
     </div>
     <div id="checkResult">
         {% for element in results_list %}

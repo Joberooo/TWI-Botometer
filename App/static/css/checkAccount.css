@@ -11,7 +11,7 @@
 }
 
 #checkContent #checkInputArea{
-    width: 80%;
+    width: calc(80% - 4em);
     margin: 0;
     padding: 0 3em 0 0;
     overflow: hidden;
@@ -62,6 +62,34 @@
     cursor: pointer;
     color: #D2353A;
     transition: color 0.3s;
+}
+
+#checkContent #randomButtonArea{
+    width: 2em;
+    margin: 0 0 0 2em;
+    padding: 0;
+    overflow: hidden;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+}
+
+#checkContent #randomButtonArea input{
+    font-size: 1em;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    background: #061B2C;
+    color: #F5F3F5;
+    border-radius: 25px;
+}
+
+#checkContent #randomButtonArea input:hover{
+    cursor: pointer;
+    background: #D2353A;
+    transition: background 0.3s;
 }
 
 #checkContent #checkResult{
