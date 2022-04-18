@@ -51,6 +51,10 @@
                 }
             }
         }
+
+        function deleteResult(id){
+            window.location.href = "/deleteResult/" + id;
+        }
     </script>
 {% endblock stylesheet %}
 
@@ -71,8 +75,14 @@
                 document.getElementById("result-{{ element.screen_name }}").style.color = getContrast(randomColor);
             </script>
                 <div id="resultHeader" onClick="toggleDescription('{{ element.screen_name }}')">
-                    <div id="resultUserName">@{{ element.screen_name }}</div>
+                    <div id="resultUserImage">
+                        {% if element.image is not sameas '' %}
+                            <image src="{{ element.image }}"></image>
+                        {% endif %}
+                    </div>
+                    <div id="resultUserName">{{ element.name }}</div>
                     <div id="resultAllFeatures">{{ element.overall }} / 5</div>
+                    <div id="resultDeleteButton" onClick="deleteResult('{{ element.screen_name }}')">&#128465;</div>
                 </div>
                 <div id="resultContent">
                     <div class="{{ element.screen_name }}" id="resultSection">
@@ -122,6 +132,13 @@
                         <div class="resultLine">
                             <div class="resultText">User screen name:</div>
                             <div class="resultValue">{{ element.screen_name }}</div>
+                        </div>
+                    </div>
+                    <div class="{{ element.screen_name }} fullwidth" id="resultSection">
+                        <h4>Description:</h4>
+                        <div class="resultLine">
+                            <div class="resultText">User description:</div>
+                            <div class="resultValue">{{ element.description }}</div>
                         </div>
                     </div>
                 </div>

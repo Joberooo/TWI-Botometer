@@ -1,5 +1,6 @@
-from flask import Flask, render_template
-from Backend.building_result_list import add_to_list
+from flask import Flask, render_template, redirect
+
+from Backend.building_result_list import add_to_list, delete_from_list
 
 app = Flask(__name__)
 results_list = []
@@ -16,6 +17,13 @@ def check_accountTwo(user_name=None):
     return render_template("checkAccount.html",
                            results_list=results_list,
                            user_name=user_name)
+
+
+@app.route("/deleteResult/<user_name>")
+def delete_result(user_name=None):
+    delete_from_list(user_name, results_list)
+    check_accountOne()
+    return redirect("/checkAccount")
 
 
 @app.route("/")

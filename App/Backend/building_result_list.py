@@ -1,5 +1,8 @@
 import botometer
+import twython.exceptions
+
 from Backend import apiBotometer
+from Backend.apiTwitter import get_user_from_twitter
 from Backend.result import Result
 
 
@@ -13,13 +16,28 @@ def add_to_list(user_name, results_list):
             results_list.insert(0, get_result(user_name))
 
 
+def delete_from_list(user_name, results_list):
+    if len(results_list) >= 1:
+        for result in results_list:
+            if user_name == result.screen_name:
+                results_list.remove(result)
+                break
+
+
 def get_result(user_name):
     if user_name is not None:
         try:
-            return Result(apiBotometer.check_account(user_name), user_name)
-        except botometer.NoTimelineError:
-            return Result("hasNoTimeline", user_name)
-        except botometer.TweepError:
-            return Result("doesntExist", user_name)
+            user = get_user_from_twitter(user_name)
+            try:
+                return Result(apiBotometer.check_account(user_name), user_name, user['name'],
+                              user['description'], user['profile_image_url_https'])
+            except botometer.NoTimelineError:
+                return Result("hasNoTimeline", user_name, user['name'] + " - NoTimelineError",
+                              user['description'], user['profile_image_url_https'])
+            except botometer.TweepError:
+                return Result("doesntExist", user_name, user['name'] + " - doesntExist",
+                              user['description'], user['profile_image_url_https'])
+        except twython.exceptions.TwythonError:
+            return Result("doesntExist", user_name, user_name + " - doesntExist", '', '')
     else:
         return None

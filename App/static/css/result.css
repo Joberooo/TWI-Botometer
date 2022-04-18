@@ -4,6 +4,7 @@
     overflow: hidden;
     box-sizing: border-box;
     margin: 1em 0 0 0;
+    border-radius: 25px;
 }
 
 #checkContent #checkResult .result #resultHeader{
@@ -18,8 +19,10 @@
     cursor: pointer;
 }
 
-#checkContent #checkResult .result #resultHeader #resultUserName{
-    width: 80%;
+#checkContent #checkResult .result #resultHeader #resultUserImage{
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -28,14 +31,50 @@
     float: left;
 }
 
+#checkContent #checkResult .result #resultHeader #resultUserImage img{
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+}
+
+#checkContent #checkResult .result #resultHeader #resultUserName{
+    width: calc(70% - 58px);
+    height: 48px;
+    line-height: 48px;
+    margin: 0;
+    padding: 0 0 0 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+}
+
 #checkContent #checkResult .result #resultHeader #resultAllFeatures{
-    width: 20%;
+    width: calc(30% - 1em);
+    height: 48px;
+    line-height: 48px;
     margin: 0;
     padding: 0;
     overflow: hidden;
     box-sizing: border-box;
     display: block;
     float: left;
+}
+
+#checkContent #checkResult .result #resultHeader #resultDeleteButton{
+    width: 1em;
+    height: 48px;
+    line-height: 48px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    font-size: 1em;
+    text-align: center;
 }
 
 #checkContent #checkResult .result #resultContent{
@@ -54,6 +93,10 @@
     box-sizing: border-box;
     display: none;
     float: left;
+}
+
+#checkContent #checkResult .result #resultContent .fullwidth{
+    width: 100% !important;
 }
 
 #checkContent #checkResult .result #resultContent #resultSection h4{
@@ -81,6 +124,10 @@
     float: left;
 }
 
+#checkContent #checkResult .result #resultContent .fullwidth .resultLine .resultText{
+    width: 30% !important;
+}
+
 #checkContent #checkResult .result #resultContent #resultSection .resultLine .resultValue{
     width: 30%;
     margin: 0;
@@ -89,4 +136,8 @@
     box-sizing: border-box;
     display: block;
     float: left;
+}
+
+#checkContent #checkResult .result #resultContent .fullwidth .resultLine .resultValue{
+    width: 70% !important;
 }

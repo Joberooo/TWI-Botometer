@@ -1,5 +1,5 @@
 class Result:
-    def __init__(self, botometer_object, user_name):
+    def __init__(self, botometer_object, user_name, name, description, image):
 
         if botometer_object == "hasNoTimeline":
             self.all_features = 0
@@ -14,6 +14,9 @@ class Result:
             self.screen_name = user_name
             self.has_timeline = False
             self.account_exist = True
+            self.name = name
+            self.description = description
+            self.image = image
         elif botometer_object == "doesntExist":
             self.all_features = 0
             self.astroturf = 0
@@ -27,6 +30,9 @@ class Result:
             self.screen_name = user_name
             self.has_timeline = False
             self.account_exist = False
+            self.name = name
+            self.description = description
+            self.image = image
         else:
             self.all_features = botometer_object['display_scores']['english']['overall']
             self.astroturf = botometer_object['display_scores']['universal']['astroturf']
@@ -40,3 +46,6 @@ class Result:
             self.screen_name = botometer_object['user']['user_data']['screen_name']
             self.has_timeline = True
             self.account_exist = True
+            self.name = name
+            self.description = description
+            self.image = image
